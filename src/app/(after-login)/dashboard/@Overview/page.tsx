@@ -1,4 +1,5 @@
 'use client';
+// 유저 인터렉션이 잦아 클라이언트로 유지
 import CircleProgressRating from '@Monocles/progress-bar/CircleProgressRating';
 import CommonChartLabel from '@Monocles/chart-label/CommonChartLabel';
 import SelectComp from '@/app/(after-login)/dashboard/@Overview/_components/SelectComp';

@@ -12,7 +12,8 @@
     "chromatic": "npx chromatic --project-token=chpt_1eacd9f713d0dae",
     "mock": "npx tsx watch ./src/mocks/http.ts",
     "conc": "concurrently \"next dev\" \"storybook dev --ci -p 6006\" \"npx tsx watch ./src/mocks/http.ts\"",
-    "local": "powershell -File ./start.ps1"
+    "local": "powershell -File ./start.ps1",
+    "dev-all": "next dev & storybook dev --ci -p 6006 & npx tsx watch ./src/mocks/http.ts"
   },
   "dependencies": {
     "@ajvls98/react-circular-progress-bar-fork-lamyzm": "^0.0.11",

@@ -6,7 +6,6 @@ import {
 } from '@/app/(after-login)/dashboard/@RatingTrends/_components/Modal';
 import { dashboardPageType } from '@/types/common/pageTypes';
 import { QueryOptions } from '@/constants/index';
-import returnFetch from 'return-fetch';
 import { fetchServerJsonData } from '@/services/api';
 
 interface AvgByMonth {
