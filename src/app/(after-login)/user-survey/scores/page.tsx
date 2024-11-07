@@ -35,7 +35,7 @@ export default function Page({ searchParams }: { searchParams: { id: string } })
       btnDescription: '호실 관리에 대한 나의 평가를 등록해 주세요',
       path: '/user-survey/scores?id=manage',
       scoreId: 1,
-      isComplated: true,
+      isComplated: false,
       ratingType: 'MANAGEMENT',
     },
     {
@@ -45,7 +45,7 @@ export default function Page({ searchParams }: { searchParams: { id: string } })
       btnDescription: '우리 시설에 대한 나의 점수를 등록해 주세요',
       path: '/user-survey/scores?id=facility',
       scoreId: 1,
-      isComplated: true,
+      isComplated: false,
       ratingType: 'FACILITY',
     },
     {
@@ -69,7 +69,6 @@ export default function Page({ searchParams }: { searchParams: { id: string } })
           cache: 'no-store',
           method: 'GET',
         }).then(res => res.json());
-
         // 각 항목별 id값 전달을 위해 평가여부 및 score id 데이터 업데이트
         const fetchScoreData = complateState.map(data => {
           const matchingType = response?.find(

@@ -26,6 +26,32 @@ function processDataToChartData(data: any): ChartDataItem[] {
   ];
 }
 
+const mockRepresentRoom = {
+  id: 1,
+  name: 'Room A',
+};
+
+const mockCompareStatistics = {
+  rental_price: 1000,
+  average_rental_price: 1200,
+  renewal_contract_rate: 80,
+  average_renewal_contract_rate: 75,
+  vacancy_rate: 5,
+  average_vacancy_rate: 10,
+  additional_data: [
+    {
+      name: 'Maintenance Cost',
+      myRoom: 200,
+      diff: 250,
+    },
+    {
+      name: 'Utility Cost',
+      myRoom: 150,
+      diff: 180,
+    },
+  ],
+};
+
 export default async function Page({ searchParams }: dashboardPageType) {
   const userInfo = await getAuth();
 
@@ -35,28 +61,30 @@ export default async function Page({ searchParams }: dashboardPageType) {
   let fetchedCompareStatistics = undefined;
   let chartData = undefined;
   try {
-    // 대표호실 정보 요청
-    const representRoomUrl = `${process.env.API_BASE_URL}/api/buildings/${buildingId}/rooms/represent`;
-    const test1 = await fetch(representRoomUrl, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    });
-    fetchedRepresentRoom = await test1.json();
+    // Mocking data instead of fetching
+    fetchedRepresentRoom = mockRepresentRoom;
+    fetchedCompareStatistics = mockCompareStatistics;
 
-    // 대표호실 비교분석 데이터
-    const representRoomStatisticsUrl = `${process.env.API_BASE_URL}/api/buildings/${buildingId}/rooms/${fetchedRepresentRoom?.id}/contracts/statistic`;
-    const test2 = await fetch(representRoomStatisticsUrl, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    // Original fetching code
+    // const representRoomUrl = `${process.env.API_BASE_URL}/api/buildings/${buildingId}/rooms/represent`;
+    // const test1 = await fetch(representRoomUrl, {
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${userInfo.token}`,
+    //   },
+    // });
+    // fetchedRepresentRoom = await test1.json();
 
-    fetchedCompareStatistics = await test2.json();
+    // const representRoomStatisticsUrl = `${process.env.API_BASE_URL}/api/buildings/${buildingId}/rooms/${fetchedRepresentRoom?.id}/contracts/statistic`;
+    // const test2 = await fetch(representRoomStatisticsUrl, {
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${userInfo.token}`,
+    //   },
+    // });
+    // fetchedCompareStatistics = await test2.json();
 
     // 차트컴포넌트 형식에 맞게 변환
     chartData = processDataToChartData(fetchedCompareStatistics);

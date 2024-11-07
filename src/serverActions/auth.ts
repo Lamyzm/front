@@ -30,8 +30,9 @@ export const signInWithCredentials = async (formData: any, redirectUrl?: string 
   // 리디렉션
   if (redirectUrl) {
     redirect(redirectUrl);
+  } else {
+    redirect('/');
   }
-  redirect('/');
 };
 
 //로그아웃

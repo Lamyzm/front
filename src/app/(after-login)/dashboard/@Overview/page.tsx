@@ -34,7 +34,7 @@ interface mappedData {
   currentTotalAvg: number | null;
 }
 
-// 이번분기와 지난분기 평균값 차트컴포넌트에 맞게 매핑하는 함수입니다.
+// 이번분기와 지난분기 평균값 차�����컴포넌트에 맞게 매핑하는 함수입니다.
 const mergedData = ({ before, current }: { before: Marge[]; current: Marge[] }): mappedData[] => {
   return before.reduce((acc, beforeItem) => {
     const currentItem = current.find(item => item.room_id === beforeItem.room_id);
@@ -46,6 +46,30 @@ const mergedData = ({ before, current }: { before: Marge[]; current: Marge[] }):
     });
     return acc;
   }, [] as mappedData[]);
+};
+
+const mockQuarterlyData: quarterlyData = {
+  complaint_avg: 75,
+  facility_avg: 80,
+  management_avg: 85,
+  selected_quarter: 2,
+  selected_year: 2023,
+  total_avg: 80,
+};
+
+const mockRoomsQuarterlyData = {
+  before: [
+    { room_id: 1, room_name: 'Room A', total_avg: 70 },
+    { room_id: 2, room_name: 'Room B', total_avg: 75 },
+    { room_id: 3, room_name: 'Room C', total_avg: 65 },
+    { room_id: 4, room_name: 'Room D', total_avg: 60 },
+  ],
+  current: [
+    { room_id: 1, room_name: 'Room A', total_avg: 80 },
+    { room_id: 2, room_name: 'Room B', total_avg: 85 },
+    { room_id: 3, room_name: 'Room C', total_avg: 75 },
+    { room_id: 4, room_name: 'Room D', total_avg: 70 },
+  ],
 };
 
 export default function Page() {
@@ -77,27 +101,35 @@ export default function Page() {
 
     const fetchAndSetData = async () => {
       try {
-        const [quarterlyScoreResult, roomsQuarterlyScoreResult] = await Promise.allSettled([
-          fetchQuarterlyScore(buildingId, selectedQuarter),
-          fetchRoomsQuarterlyScore(buildingId, selectedQuarter),
-        ]);
-        if (quarterlyScoreResult.status === 'fulfilled') {
-          // console.log('빌딩 setFetchedQuarters', quarterlyScoreResult.value);
-          setFetchedQuarters(quarterlyScoreResult.value);
-        } else {
-          console.error('Error fetching quarterly score', quarterlyScoreResult.reason);
-        }
+        // Mocking data instead of fetching
+        setFetchedQuarters(mockQuarterlyData);
+        setFetchedMyRoomsQuarter(
+          mergedData({
+            before: mockRoomsQuarterlyData.before,
+            current: mockRoomsQuarterlyData.current,
+          }),
+        );
 
-        if (roomsQuarterlyScoreResult.status === 'fulfilled') {
-          setFetchedMyRoomsQuarter(
-            mergedData({
-              before: roomsQuarterlyScoreResult.value.before,
-              current: roomsQuarterlyScoreResult.value.current,
-            }),
-          );
-        } else {
-          console.error('Error fetching rooms quarterly score', roomsQuarterlyScoreResult.reason);
-        }
+        // Original fetching code
+        // const [quarterlyScoreResult, roomsQuarterlyScoreResult] = await Promise.allSettled([
+        //   fetchQuarterlyScore(buildingId, selectedQuarter),
+        //   fetchRoomsQuarterlyScore(buildingId, selectedQuarter),
+        // ]);
+        // if (quarterlyScoreResult.status === 'fulfilled') {
+        //   setFetchedQuarters(quarterlyScoreResult.value);
+        // } else {
+        //   console.error('Error fetching quarterly score', quarterlyScoreResult.reason);
+        // }
+        // if (roomsQuarterlyScoreResult.status === 'fulfilled') {
+        //   setFetchedMyRoomsQuarter(
+        //     mergedData({
+        //       before: roomsQuarterlyScoreResult.value.before,
+        //       current: roomsQuarterlyScoreResult.value.current,
+        //     }),
+        //   );
+        // } else {
+        //   console.error('Error fetching rooms quarterly score', roomsQuarterlyScoreResult.reason);
+        // }
       } catch (error) {
         //  TODO: 에러핸들링 추가
         console.error('Error in fetching data', error);

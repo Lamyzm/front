@@ -10,6 +10,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 import { z } from 'zod';
 import { SubmitHandler } from 'react-hook-form';
 import { FormInput, LoginTab } from '@/types/auth';
+import { useRouter } from 'next/navigation';
 
 export default function TabsContainer({
   zodSchema,
@@ -27,7 +28,7 @@ export default function TabsContainer({
   const tabTriggerClass =
     'rounded-b-none border-[1px] border-r-0 bg-gray-50 text-black data-[state=active]:border-b-0 data-[state=active]:bg-white data-[state=active]:shadow-none w-full  py-[20px] text-h4 desktop:font-bold ';
   const tabContentClass = 'rounded-sm m-0 border-x-[1px] desktop:px-16 pt-11 grow pb-[64px] border-b-[1px]';
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -78,7 +79,13 @@ export default function TabsContainer({
                     register={register}
                   />
                 ))}
-                <Button className="mt-3 py-3">{isLoading ? <LoadingSpinner /> : '로그인'}</Button>
+                <Button
+                  onClick={() => {
+                    router.push('/dashboard');
+                  }}
+                  className="mt-3 py-3">
+                  {isLoading ? <LoadingSpinner /> : '로그인'}
+                </Button>
               </form>
             </TabsContent>
           );

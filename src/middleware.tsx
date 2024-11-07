@@ -25,8 +25,12 @@ export async function middleware(request: NextRequest) {
     raw: true,
   });
 
+  console.log('미들웨어 토큰:', token);
+
   // 유저 정보
   const userInfo = (await auth()) as CustomSession;
+
+  console.log('미들웨어 유저 정보:', userInfo);
 
   // 임시로 유저 정보없을시 인증로직 이동을 위해 대시보드로 이동
   // TODO: 이후 랜딩페이지 제작시 해당 로직 제거
@@ -34,12 +38,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  // user role 이 소유자고 / 일때 dashboard로 리디렉션
+  // // user role 이 소유자고 / 일때 dashboard로 리디렉션
   if (userInfo && userInfo.role === 'OWNER' && pathname === '/') {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  // 유저토큰 없을시 join으로 리디렉션
+  // // 유저토큰 없을시 join으로 리디렉션
   if (isMatch(pathname, matchersForAuth)) {
     return userInfo
       ? NextResponse.next()
@@ -47,7 +51,7 @@ export async function middleware(request: NextRequest) {
         NextResponse.redirect(new URL(`/login?callbackUrl=${request.url}`, request.url));
   }
 
-  // 유저토큰 있을시 로그인,회원가입 이동 차단
+  // // 유저토큰 있을시 로그인,회원가입 이동 차단
   if (pathname.startsWith('/login') || pathname.startsWith('/join')) {
     if (userInfo) {
       return NextResponse.redirect(new URL('/', request.url));

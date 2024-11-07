@@ -50,11 +50,14 @@ export const {
         const userInfo = credentials as unknown as CredentialsType;
         try {
           // 번호가 있으면 회원가입으로 간주
-          if (!userInfo.phoneNumber) {
-            return await _signIn('sign-in', userInfo);
-          }
-          return await _signIn('sign-up', userInfo);
+          // if (!userInfo.phoneNumber) {
+          //   return await _signIn('sign-in', userInfo);
+          // }
+          // return await _signIn('sign-up', userInfo);
+          console.log('authorize 함수 호출됨:', userInfo);
+          return { ...userInfo, id: 'dummy-id' }; // 임의의 유저 세션 생성
         } catch (error) {
+          console.error('authorize 함수 에러:', error);
           throw error;
         }
       },
@@ -69,18 +72,18 @@ export const {
   },
   callbacks: {
     jwt: async ({ token, user, trigger, session }) => {
-      // console.log('token', token, 'user', user, 'trigger', trigger, 'session', session);
+      console.log('JWT 콜백 호출됨:', { token, user, trigger, session });
       if (user) {
         token = { ...token, ...user };
       }
+      console.log('JWT 콜백 반환됨:', token);
       return token;
     },
     session: async ({ session, token, user }) => {
-      // console.log('session', session, 'token', token, 'user', user);
+      console.log('세션 콜백 호출됨:', { session, token, user });
       session.token = token.token as string;
       session.role = token.role;
-      // session.hi = 'token';
-
+      console.log('세션 콜백 반환됨:', session);
       return session;
     },
   },
@@ -90,41 +93,35 @@ async function _signIn(
   type: 'sign-up' | 'sign-in',
   userInfo: { account?: string; password: string; role: string; phoneNumber?: string },
 ) {
-  const { account, password, role, phoneNumber } = userInfo;
-  // console.log('역할이 있어요', account, password, role, phoneNumber, type, `public-api/${type}/${role}`);
-  try {
-    const bodyData: { email: string | undefined; password: string; phone_number?: string } = {
-      email: account,
-      password: password,
-    };
-    if (type === 'sign-up' && phoneNumber) {
-      bodyData['phone_number'] = phoneNumber;
-    }
-    // const returnFetchFnc = returnFetch({
-    //   baseUrl: `${process.env.HOST_URL}`,
-    //   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-    // });
-
-    const res = await fetch(`${process.env.API_BASE_URL}/public-api/${type}/${role}`, {
-      cache: 'no-store',
-      method: 'POST',
-      body: JSON.stringify(bodyData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      // console.log(data);
-      return data;
-    } else {
-      const errorMessage = await res.text();
-      throw new Error(errorMessage);
-    }
-  } catch (error) {
-    console.error('인증 에러:', error);
-    const errorMessage = error instanceof Error ? error.message : ERROR_MESSAGE;
-    throw new Error(errorMessage);
-  }
+  // 임의의 유저 세션 생성
+  return { ...userInfo, id: 'dummy-id' };
+  // const { account, password, role, phoneNumber } = userInfo;
+  // try {
+  //   const bodyData: { email: string | undefined; password: string; phone_number?: string } = {
+  //     email: account,
+  //     password: password,
+  //   };
+  //   if (type === 'sign-up' && phoneNumber) {
+  //     bodyData['phone_number'] = phoneNumber;
+  //   }
+  //   const res = await fetch(`${process.env.API_BASE_URL}/public-api/${type}/${role}`, {
+  //     cache: 'no-store',
+  //     method: 'POST',
+  //     body: JSON.stringify(bodyData),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (res.ok) {
+  //     const data = await res.json();
+  //     return data;
+  //   } else {
+  //     const errorMessage = await res.text();
+  //     throw new Error(errorMessage);
+  //   }
+  // } catch (error) {
+  //   console.error('인증 에러:', error);
+  //   const errorMessage = error instanceof Error ? error.message : ERROR_MESSAGE;
+  //   throw new Error(errorMessage);
+  // }
 }

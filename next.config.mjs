@@ -24,7 +24,15 @@ const nextConfig = {
     return config;
   },
   // TODO: auth js에서 내부 api에 접근할 때 프록시되는 문제가 있어서 api -> apis 로 변경
-
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/dashboard',
+  //       permanent: false, // true로 설정하면 영구 리다이렉션 (301), false로 설정하면 임시 리다이렉션 (302)
+  //     },
+  //   ];
+  // },
   async rewrites() {
     return [
       {

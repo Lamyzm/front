@@ -16,6 +16,7 @@ export enum NAV_TYPE {
   DASH_BOARD = 'dashboard',
   ROOM_DETAIL = 'room',
   EVALUATION = 'evaluation',
+  USER_SURVEY = 'userSurvey',
 }
 
 export type NavItemsType = Record<NAV_TYPE, { path: string; label: string }>;
@@ -24,6 +25,7 @@ const NAV_ITEMS: NavItemsType = {
   [NAV_TYPE.DASH_BOARD]: { path: '/dashboard', label: '대시보드' },
   [NAV_TYPE.EVALUATION]: { path: '/room', label: '호실관리' },
   [NAV_TYPE.ROOM_DETAIL]: { path: '/rating-detail', label: '평가상세' },
+  [NAV_TYPE.USER_SURVEY]: { path: '/user-survey', label: '유저평가' },
 };
 const GNB_HEIGHT = 'desktop:h-gnb h-mobileGnbHeight';
 
@@ -46,12 +48,17 @@ export default function DesktopGNB() {
         )}>
         <div className="mx-auto flex h-full w-[1440px] items-center justify-between">
           <div className={cn(' flex items-center gap-4', GNB_HEIGHT)}>
-            <LocalIcon
-              width={128}
-              height={63}
-              className=" desktop:w-ful h-[36px] w-[73px] desktop:h-full"
-              name={'OfficenerMainLogo'}
-            />
+            <Link
+              href={'/'}
+              prefetch={false}>
+              <LocalIcon
+                width={128}
+                height={63}
+                className=" desktop:w-ful h-[36px] w-[73px] desktop:h-full"
+                name={'OfficenerMainLogo'}
+              />
+            </Link>
+
             <Suspense>
               <NavListComp />
             </Suspense>

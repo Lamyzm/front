@@ -49,6 +49,39 @@ function createContractProgress({
   };
 }
 
+const mockRepresentRoom = {
+  id: 1,
+  name: 'RoomA빌딩',
+};
+
+const mockContractPeriod = {
+  contracts: {
+    info_list: [
+      {
+        start_date: '2023-01-01',
+        end_date: '2023-12-31',
+        contract_status: 'ACTIVE',
+      },
+      {
+        start_date: '2022-01-01',
+        end_date: '2022-12-31',
+        contract_status: 'COMPLETED',
+      },
+    ],
+  },
+};
+
+const mockEvaluationProgress = {
+  my: [
+    {
+      evaluation_progress: 75,
+    },
+    {
+      evaluation_progress: 80,
+    },
+  ],
+};
+
 export default async function Page({ searchParams }: dashboardPageType) {
   const buildingName = searchParams && searchParams[QueryOptions.BuildingName];
   const buildingId = searchParams && searchParams[QueryOptions.Id];
@@ -56,29 +89,30 @@ export default async function Page({ searchParams }: dashboardPageType) {
   // 계약기간
 
   try {
-    // 대표호실 정보 요청
-    const representRoomUrl = `/api/buildings/${buildingId}/rooms/represent`;
-    const fetchedRepresentRoom = await fetchServerJsonData(representRoomUrl, { cache: 'default', method: 'GET' });
-    console.log(representRoomUrl);
-    // 대표호실 계약 기간 요청
-    const contractPeriodUrl = `/api/buildings/${buildingId}/rooms/${fetchedRepresentRoom?.id}`;
-    const fetchedContractPeriod = await fetchServerJsonData(contractPeriodUrl, { cache: 'default', method: 'GET' });
-    // console.log('fetchedContractPeriod', fetchedContractPeriod);
-    console.log(contractPeriodUrl);
-    // 대표호실평가 진행률 요청
-    const evaluationProgressUrl = `/api/buildings/${buildingId}/rooms/${fetchedRepresentRoom?.id}/yearly-score-interval-month?yearMonth=2024-06`;
-    const evaluationProgress = await fetchServerJsonData(evaluationProgressUrl, { cache: 'default', method: 'GET' });
-    // 현재 계약 기간과 상태를 나타내는 객체
+    // Mocking data instead of fetching
+    const fetchedRepresentRoom = mockRepresentRoom;
+    const fetchedContractPeriod = mockContractPeriod;
+    const evaluationProgress = mockEvaluationProgress;
+
+    // Original fetching code
+    // const representRoomUrl = `/api/buildings/${buildingId}/rooms/represent`;
+    // const fetchedRepresentRoom = await fetchServerJsonData(representRoomUrl, { cache: 'default', method: 'GET' });
+    // console.log(representRoomUrl);
+    // const contractPeriodUrl = `/api/buildings/${buildingId}/rooms/${fetchedRepresentRoom?.id}`;
+    // const fetchedContractPeriod = await fetchServerJsonData(contractPeriodUrl, { cache: 'default', method: 'GET' });
+    // console.log(contractPeriodUrl);
+    // const evaluationProgressUrl = `/api/buildings/${buildingId}/rooms/${fetchedRepresentRoom?.id}/yearly-score-interval-month?yearMonth=2024-06`;
+    // const evaluationProgress = await fetchServerJsonData(evaluationProgressUrl, { cache: 'default', method: 'GET' });
+    // console.log(evaluationProgressUrl);
+
     const contractStatus = fetchedContractPeriod.contracts?.info_list[0]?.contract_status as string;
-    console.log(evaluationProgressUrl);
-    //TODO: status에 따라 값 결정하기 !
     const contractDateInfo = createContractProgress({
       start_date: fetchedContractPeriod.contracts?.info_list[0]?.start_date,
       end_date: fetchedContractPeriod.contracts?.info_list[0]?.end_date,
       status: CONTRACT_STATUSES[contractStatus] ? CONTRACT_STATUSES[contractStatus].status : 'UNKNOWN',
       statusDescription: CONTRACT_STATUSES[contractStatus] ? CONTRACT_STATUSES[contractStatus].description : 'UNKNOWN',
     });
-    // 대표호실이름
+
     const representRoomName = `${buildingName ?? ''} ${fetchedRepresentRoom?.name ?? ''}`;
     return (
       <div className="rounded-container bg-white px-[40px] py-[32px]">
@@ -94,7 +128,8 @@ export default async function Page({ searchParams }: dashboardPageType) {
           <div>
             <p className="schedule-title">계약 기간</p>
             <ContractProgress
-              value={contractDateInfo?.progressPercentage}
+              // value={contractDateInfo?.progressPercentage}
+              value={70}
               percentageFont={'body1'}
               periodFontClassName="text-gray-400"
               contractDate={contractDateInfo}

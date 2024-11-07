@@ -18,7 +18,7 @@ export default function Page() {
   const router = useRouter();
   const { setMidModal } = useMidReminderModalStore();
   const { setLastModal } = useLastReminderModalStore();
-  const [scoreData, setScoreData] = useState(false);
+  const [scoreData, setScoreData] = useState(true);
 
   const handleSurveyButtonClick = () => {
     router.push('/user-survey/scores'); // 히스토리 저장을 위해 push로 이동
