@@ -70,8 +70,8 @@
 호실관리페이지에서는 계약정보와 내 호실을 한눈에 비교해볼 수 있습니다.
 
 ![image](https://github.com/user-attachments/assets/4b0a7305-1379-4e1a-9154-21cd91721054)
-![image](https://github.com/user-attachments/assets/b0c6e7a1-b7b5-4384-86c6-6494a60d31a9)
-![image](https://github.com/user-attachments/assets/7b8727a6-f652-40c2-becd-9330c316ace7)
+![image](https://github.com/user-attachments/assets/202d8ebf-9d41-4065-8a4e-5e4a2cb2e9a5)
+![image](https://github.com/user-attachments/assets/9464d5cc-b822-43b5-a6dd-8e2c366a7498)
 
 유저는 관리점수, 민원점수, 시설점수를 평가할 수 있으며
 해당 평가를 통해 소유자는 이를 확인하고
