@@ -12,22 +12,19 @@
 
 <br />
 
-## ✏️ 프로젝트 소개
+## 🏆프로젝트 목표
 
-- **프로젝트 주제** : 소유자의 호실에 관한 평가 정보를 간략하게 제공하는 `호실 점수` 서비스 기획 및 개발
-- **프로젝트 목적** : 오피스너 도입 결정 주체인 '소유자'가 필요로 하는 기능을 제공하여 오피스너 도입 성공률 높이기
-- **프로젝트 전체 기간** : 2024년 4월 15일 (월) ~ 2024년 6월 13일(목)
-- **프로젝트 개발 기간** : 2024년 5월 17일 (금) ~ 2024년 6월 13일(목)
+- 사용자의 요구를 충족하는 간편한 정보 제공 및 기능 구현
+- 대시보드 성능 최적화로 사용자 경험 개선
+- 안정적인 인증 및 데이터 관리 기능 제공
 
 <br />
 
 ## 🔗 프로젝트 링크
 
-|                                                               배포 사이트                                                                |                                                                   깃허브                                                                    |                                                                                          스토리북                                                                                           |
-| :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <a href="https://front-alpha-five.vercel.app/dashboard"><img src="https://img.shields.io/badge/오피스너-3761E2?style=flat-square&"/></a> | <a href="https://github.com/KPT-Final-Team9/front"><img src="https://img.shields.io/badge/Front Repository-181717?style=flat-square&"/></a> | <a href="https://66421fd64f35d30603e16002-eexlmnzjxv.chromatic.com/?path=/docs/chart-gradientchart--docs"><img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&"/></a> |
-
-- 임시 배포 레포지토리 (<a href="https://github.com/Lamyzm/front">링크</a>)
+|                                                      배포 사이트                                                       |                                                                   깃허브                                                                    |                                                                                          스토리북                                                                                           |
+| :--------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <a href="https://www.officedev.site/"><img src="https://img.shields.io/badge/오피스너-3761E2?style=flat-square&"/></a> | <a href="https://github.com/KPT-Final-Team9/front"><img src="https://img.shields.io/badge/Front Repository-181717?style=flat-square&"/></a> | <a href="https://66421fd64f35d30603e16002-eexlmnzjxv.chromatic.com/?path=/docs/chart-gradientchart--docs"><img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&"/></a> |
 
 <br />
 
@@ -36,6 +33,50 @@
 ![stack](https://github.com/KPT-Final-Team9/front/assets/104605709/9e53cdb5-cb2e-4d63-817e-61384b09b717)
 
 <br />
+
+## ✏️ 프로젝트 소개
+
+- **프로젝트 주제** : 소유자의 호실에 관한 평가 정보를 간략하게 제공하는 `호실 점수` 서비스 기획 및 개발
+- **프로젝트 목적** : 오피스너 도입 결정 주체인 '소유자'가 필요로 하는 기능을 제공하여 오피스너 도입 성공률 높이기
+- **프로젝트 전체 기간** : 2024년 4월 15일 (월) ~ 2024년 6월 13일(목)
+- **프로젝트 개발 기간** : 2024년 5월 17일 (금) ~ 2024년 6월 13일(목)
+
+**현재는 백엔드 서버가 가동되지 않기 때문에 임시 mock 데이터만 존재합니다.**
+
+![image](https://github.com/user-attachments/assets/2642dcb8-c0a2-4f1f-93d4-0557d882399e)
+
+유효한 이메일 형식ex) example@exam.com
+으로 임의로 로그인 가능합니다.
+
+실제 가동되고있는 officener 서비스에 연결되는것이 목적이었기에
+각 로그인은 실제 서비스와 연동되어 각 페이지로 이동되게 할 목적으로 구성했습니다.
+현재는 소유자를 위한 서비스만 제공됩니다.
+
+![image](https://github.com/user-attachments/assets/302da9b0-6be3-41fc-ba14-b3c667308150)
+
+대시보드는 많은 데이터를 패치해야하기 때문에 병렬적으로 패치할 수 있는 nextjs의 Streaming을 사용했습니다.
+
+메인 대시보드에서는 유저가 평가한 항목을 전분기와 비교해서 한눈에 확인 할 수 있도록 했습니다.
+
+![image](https://github.com/user-attachments/assets/f7b891c6-66ef-4549-a01f-b37899646b00)
+![image](https://github.com/user-attachments/assets/d5f4982f-d71c-4afc-b0be-283f6b5bd8b4)
+우측의 별표를 통해 대표호실을 등록할 수 있으며
+
+![image](https://github.com/user-attachments/assets/78b1e0e5-6ce0-416c-b1c5-1088d1b29ff6)
+
+대표호실은 같은 빌딩의 다른 대표호실과 비교해볼 수 있도록 고안했습니다.
+
+![image](https://github.com/user-attachments/assets/c822801f-ada1-436e-9c61-7b10ba5006d5)
+
+호실관리페이지에서는 계약정보와 내 호실을 한눈에 비교해볼 수 있습니다.
+
+![image](https://github.com/user-attachments/assets/4b0a7305-1379-4e1a-9154-21cd91721054)
+![image](https://github.com/user-attachments/assets/b0c6e7a1-b7b5-4384-86c6-6494a60d31a9)
+![image](https://github.com/user-attachments/assets/7b8727a6-f652-40c2-becd-9330c316ace7)
+
+유저는 관리점수, 민원점수, 시설점수를 평가할 수 있으며
+해당 평가를 통해 소유자는 이를 확인하고
+빌딩관리를 더 최적화 할 수 있습니다
 
 ## 🤝 프론트엔드 팀원 구성
 
