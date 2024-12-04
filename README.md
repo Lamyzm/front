@@ -69,7 +69,6 @@
 
 호실관리페이지에서는 계약정보와 내 호실을 한눈에 비교해볼 수 있습니다.
 
-![image](https://github.com/user-attachments/assets/4b0a7305-1379-4e1a-9154-21cd91721054)
 ![image](https://github.com/user-attachments/assets/202d8ebf-9d41-4065-8a4e-5e4a2cb2e9a5)
 ![image](https://github.com/user-attachments/assets/9464d5cc-b822-43b5-a6dd-8e2c366a7498)
 
