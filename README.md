@@ -54,9 +54,8 @@
 
 ![image](https://github.com/user-attachments/assets/302da9b0-6be3-41fc-ba14-b3c667308150)
 
-대시보드는 많은 데이터를 패치해야하기 때문에 병렬적으로 패치할 수 있는 nextjs의 Streaming을 사용했습니다.
-
-메인 대시보드에서는 유저가 평가한 항목을 전분기와 비교해서 한눈에 확인 할 수 있도록 했습니다.
+대시보드에서는 많은 데이터를 효율적으로 로드하기 위해 Next.js의 Streaming 기능을 활용했습니다.
+메인 대시보드에서는 사용자가 평가한 항목을 전 분기와 비교하여 한눈에 확인할 수 있도록 구성했습니다.
 
 ![image](https://github.com/user-attachments/assets/f7b891c6-66ef-4549-a01f-b37899646b00)
 ![image](https://github.com/user-attachments/assets/d5f4982f-d71c-4afc-b0be-283f6b5bd8b4)
